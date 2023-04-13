@@ -1,0 +1,44 @@
+1. Create a DynamoDB table name - http-crud-tutorial-items
+2. Add the partition key as "id". Use default settings and create the table.
+3. Choose Create function, Select Author from scratch
+4. For Function name, enter http-crud-tutorial-function
+5. Under Runtime info select Node.js 14.x
+6. Under Permissions choose Change default execution role
+7. Select Create a new role from AWS policy templates
+8. For Role name, enter http-crud-tutorial-role
+9. For Policy templates, choose Simple microservice permissions. This policy grants the Lambda function permission to interact with DynamoDB.
+
+Creating API and ROUTES:
+10. Create HTTP API name - http-crud-tutorial-api.
+11. Create Routes.
+12. Add method as GET and for the path, enter /items/{id}. The {id} at the end of the path is a path parameter that API Gateway retrieves from the request path when a client makes a request.
+13. Choose Create, Repeat the same steps for GET /items, DELETE /items/{id}, and PUT /items.
+
+Create an integration:
+14. Choose your API (http-crud-tutorial-api), Choose Integrations, Choose Manage integrations and then choose Create
+15. Skip Attach this integration to a route. You complete that in a later step.
+16. For Integration type, choose Lambda function
+17. For Lambda function, enter http-crud-tutorial-function
+
+To attach integrations to routes:
+15.Choose your API (http-crud-tutorial-api)
+16.Choose Integrations
+17.Choose a route
+18.Under Choose an existing integration, choose http-crud-tutorial-function
+
+Commands to invoke API:
+Invoke URL:	https://6jlfq51ryk.execute-api.us-east-1.amazonaws.com
+
+To create or update an item:
+curl -X "PUT" -H "Content-Type: application/json" -d "{\"id\": \"123\", \"price\": 12345, \"name\": \"myitem\"}" https://6jlfq51ryk.execute-api.us-east-1.amazonaws.com/items
+
+To get all items:
+curl https://6jlfq51ryk.execute-api.us-east-1.amazonaws.com/items/123
+
+To get an item:
+curl https://6jlfq51ryk.execute-api.us-east-1.amazonaws.com/items/123
+
+To delete an item:
+curl -X "DELETE" https://6jlfq51ryk.execute-api.us-east-1.amazonaws.com/items/123
+
+Project link : https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-dynamo-db.html
